@@ -139,3 +139,39 @@ ECMAScript 3.1变成了ECMA-262的第5版
 [flat]:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat
 [trimStart]:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/trimStart
 [fromEntries]:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries
+
+### 2. ECMAScript 符合性
+
+❑ 支持ECMA-262中描述的所有“类型、值、对象、属性、函数，以及程序语法与语义”；  
+❑ 支持Unicode字符标准。  
+此外，符合性实现还可以满足下列要求。  
+❑ 增加ECMA-262中未提及的“额外的类型、值、对象、属性和函数”。ECMA-262所说的这些额外内容主要指规范中未给出的新对象或对象的新属性。  
+❑ 支持ECMA-262中没有定义的“程序和正则表达式语法”（意思是允许修改和扩展内置的正则表达式特性）。  
+
+### 3. 浏览器对ECMAScript的支持
+
+2008年，五大浏览器（IE、Firefox、Safari、Chrome和Opera）全部兼容ECMA-262第3版。IE8率先实现ECMA-262第5版，并在IE9中完整支持。Firefox 4很快也做到了。下表列出了主要的浏览器版本对ECMAScript的支持情况。
+
+## 1.2.2 DOM
+
+### 1. DOM规范的制定
+在IE4和Netscape Navigator 4支持不同形式的动态HTML（DHTML）的情况下，开发者首先可以做到不刷新页面而修改页面外观和内容。  
+万维网联盟（W3C, World Wide Web Consortium）开始了制定DOM标准的进程。
+
+
+### 2. DOM级别
+1998年10月，DOM Level 1成为W3C的推荐标准
+  - DOM Core 映射XML文档
+  - DOM HTML 扩展 加了特定于HTML的对象和方法
+
+DOM Level 2
+  - 鼠标标和用户界面事件、范围、遍历（迭代DOM节点的方法）的支持
+  - 通过对象接口支持了层叠样式表（CSS）。
+  - DOM Level 1中的DOM Core被扩展以包含对XML命名空间的支持。
+
+
+
+❑ DOM视图：描述追踪文档不同视图（如应用CSS样式前后的文档）的接口。
+❑ DOM事件：描述事件及事件处理的接口。
+❑ DOM样式：描述处理元素CSS样式的接口。
+❑ DOM遍历和范围：描述遍历和操作DOM树的接口。
