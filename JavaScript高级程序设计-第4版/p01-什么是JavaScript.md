@@ -45,7 +45,7 @@ ECMASript定义了
 ❑ 操作符  
 ❑ 全局对象  
 
-### 1．ECMAScript版本
+### 1. ECMAScript版本
 ECMAScript不同的版本以“edition”表示(即ECMA-262版本)  
 最近的是2019年6月的第10版 [*12th Edition – ECMAScript 2021*](https://en.wikipedia.org/wiki/ECMAScript#12th_Edition_–_ECMAScript_2021)  
 
@@ -164,14 +164,64 @@ ECMAScript 3.1变成了ECMA-262的第5版
   - DOM Core 映射XML文档
   - DOM HTML 扩展 加了特定于HTML的对象和方法
 
-DOM Level 2
-  - 鼠标标和用户界面事件、范围、遍历（迭代DOM节点的方法）的支持
-  - 通过对象接口支持了层叠样式表（CSS）。
-  - DOM Level 1中的DOM Core被扩展以包含对XML命名空间的支持。
+DOM Level 2新增模块
+
+❑ DOM视图：描述追踪文档不同视图（如应用CSS样式前后的文档）的接口。  
+❑ DOM事件：描述事件及事件处理的接口。  
+❑ DOM样式：描述处理元素CSS样式的接口。  
+❑ DOM遍历和范围：描述遍历和操作DOM树的接口。  
+❑ DOM Level 1中的DOM Core被扩展以包含对XML命名空间的支持。
+
+DOM Level 3
+  增加以统一的方式加载和保存文档的方法（包含在一个叫DOM Load and Save的新模块中）
+  验证文档的方法（DOM Validation）
+  DOM Core扩展了所有XML 1.0的特性，包括XML Infoset、XPath和XML Base。
+
+目前，W3C不再按照Level来维护DOM了，而是作为DOM Living Standard来维护，其快照称为DOM4。  
+DOM4新增的内容包括替代Mutation Events的Mutation Observers
+
+// 没有一个标准叫“DOM Level 0” Level 0可以看作IE4和Netscape Navigator 4中最初支持的DHTML。
+
+### 3. 其他DOM
+
+除了DOM Core和DOM HTML接口之外其他语言的DOM标准
+
+❑ 可伸缩矢量图（SVG, Scalable Vector Graphics）
+❑ 数学标记语言（MathML, Mathematical Markup Language）
+❑ 同步多媒体集成语言（SMIL, Synchronized Multimedia IntegrationLanguage）
+
+### 4. Web浏览器对DOM的支持情况
+DOM标准在Web浏览器实现它之前就已经作为标准发布了。  
+IE在第5版中尝试支持DOM，但直到5.5版才开始真正支持，该版本实现了DOM Level 1的大部分。  
+之后版本仅修复了一些问题没有实现新特性  
+
+DOM标准在Web浏览器实现它之前就已经作为标准发布了。IE在第5版中尝试支持DOM，但直到5.5版才开始真正支持，该版本实现了DOM Level 1的大部分。
+
+## 1.2.3 BOM
+IE3和Netscape Navigator 3提供了浏览器对象模型（BOM）API，用于支持访问和操作浏览器的窗口  
+HTML5规范正式规范的形式涵盖了尽可能多的BOM特性。
+
+❑ 弹出新浏览器窗口的能力；
+❑ 移动、缩放和关闭浏览器窗口的能力；
+❑ navigator对象，提供关于浏览器的详尽信息；
+❑ location对象，提供浏览器加载页面的详尽信息；
+❑ screen对象，提供关于用户屏幕分辨率的详尽信息；
+❑ performance对象，提供浏览器内存占用、导航行为和时间统计的详尽信息；
+❑ 对cookie的支持；
+❑ 其他自定义对象，如XMLHttpRequest和IE的ActiveXObject。
 
 
+## 1.3 JavaScript版本
+Netscape/Mozilla(firefox)一直沿用JavaScript的版本编号  
 
-❑ DOM视图：描述追踪文档不同视图（如应用CSS样式前后的文档）的接口。
-❑ DOM事件：描述事件及事件处理的接口。
-❑ DOM样式：描述处理元素CSS样式的接口。
-❑ DOM遍历和范围：描述遍历和操作DOM树的接口。
+Netscape Navigator 2 - JavaScript 1.0
+Firefox 4 - JavaScript 1.8.5
+
+## 1.4 小结
+JavaScript保护
+❑ ECMAScript：由ECMA-262定义并提供核心功能。
+❑ 文档对象模型（DOM）：提供与网页内容交互的方法和接口。
+❑ 浏览器对象模型（BOM）：提供与浏览器交互的方法和接口。
+
+五大Web浏览器（IE、Firefox、Chrome、Safari和Opera）基本支持 ES5  
+ES6（ECMAScript 6）和ES7（ECMAScript 7）的支持度也在不断提升。
