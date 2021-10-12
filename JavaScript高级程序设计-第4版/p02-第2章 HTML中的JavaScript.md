@@ -36,12 +36,12 @@
 
 1. 向src属性指定的路径发送一个GET请求，不受浏览器同源策略限制(jsonx原理)，但返回并被执行的JavaScript则受限制。当然，这个请求仍然受父页面HTTP/HTTPS协议的限制。
 
-## 2.1.1 标签位置
+### 2.1.1 标签位置
 
 最早所有&lt;script&gt;元素都被放在页面的&lt;head&gt;标签内，但是会阻塞页面渲染  
 现代Web应用程序通常将所有JavaScript引用放在&lt;body&gt;元素中的页面内容后面
 
-## 2.1.2 推迟执行脚本
+### 2.1.2 推迟执行脚本
 defer的属性 脚本会被延迟到整个页面都解析完毕后再运行  
 HTML5规范要求脚本应该按照它们出现的顺序执行  
 会在DOMContentLoaded事件之前执行 （请参考第17章）
@@ -50,15 +50,84 @@ defer属性的支持是从IE4、Firefox 3.5、Safari 5和Chrome7开始的。
 XHTML文档，指定defer属性时应该写成defer="defer"。
 
 
-## 2.1.3 异步执行脚本
+### 2.1.3 异步执行脚本
 
 async属性 不阻塞异步下载，下载后立即执行，不保证执行顺序  
 异步脚本不应该在加载期间修改DOM(或者有副作用的操作 会相互影响)
 
 XHTML文档，指定async属性时应该写成async="async"
 
-## 2.1.4 动态加载脚本
+### 2.1.4 动态加载脚本
 
+通过向DOM中动态添加script元素同样可以加载指定的脚本  
+把HTMLElement元素添加到DOM且执行到这段代码之前不会发送请求  
+默认情况下，动态插入的&lt;script&gt;元素是以异步方式加载的  
+但是不是所有浏览器都支持异步加载，为了统一行为最好一致设置async为false  
+```js
+let script = document.createElement('script')
+script.src = 'xxx.js'
+script.async = false
+document.head.appendChild(script)
+```
 
+- 动态加载对浏览器不是可见的，会影响在资源获取队列中的优先级
+- 可能会影响性能
+- 使用&lt;link ref="preload"&gt;&lt;/link &gt; 让浏览器预加载资源 [Link types: preload](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/preload)
+```html
+<link rel="stylesheet" href="xxx.js">
+```
+
+### 2.1.5 XHTML中的变化
+
+XHTML是将HTML作为XML的应用重新包装的结果  
+(就像html中的ts 一个xml定义文件 更倾向于xml语法 更严格的html)  
+XHTML中使用JavaScript必须指定type属性且值为text/javascript  
+XHTML虽然已经退出历史舞台
+
+```html
+<script type="test/javascript"> 
+function compare(a,b){
+    if(a < b){
+        return true
+    }
+    return false
+}
+</script>
+```
+html解析script元素时会使用特殊规则，xhtml中则是按xml的语法来解析
+上面的代码在xhtml中 (&lt;) 会被解析为标签开始，并且 (&lt;) 后面不能是空格  
+解决 1. 需要把 (&lt;) 替换为HTML 字符实体 (&amp;lt;)
+解决 2. 把代码放在CDATA块中,并且用注释来支持\[支持html语法的浏览器]
+
+```xhtml
+<script type="test/javascript"> 
+// <![CDATA[
+function compare(a,b){
+    if(a < b){
+        return true
+    }
+    return false
+}
+// ]]>
+</script>
+```
+
+可以设置script元素 EMEI 类型 type="application/xhtml+xml"指定为XHTML,不是所有浏览器都支持
+
+### 2.1.6 废弃的语法
+
+早期的type属性使用一个MIME类型字符没有跨浏览器标准化，这会导致不支持的MIME类型的script标签被跳过  
+所以最好不指定type属性
+
+对于早期不支持script标签的浏览器(Mosaic)会直接把里面的内容显示在页面上，所以会有下面这种写法  
+但是在xhtml模式下，这样的脚本又会被忽略
+
+```html
+<script><!--
+    function fn(){}
+//--></script>
+```
+
+## 2.2 行内代码与外部文件
 
 
