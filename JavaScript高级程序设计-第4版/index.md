@@ -1,7 +1,9 @@
 
-出版时间：2020-09  
-涵盖ECMAScript2019
+JavaScript高级程序设计（第4版）
+Professional JavaScript for Web Developers，4th Edition
 
+出版时间：2020-09  
+涵盖 ECMAScript2019 / ES10
 
 1. 第 1章　什么是JavaScript  
     起源发展 JavaScript与ECMAScript的关系、DOM、BOM，以及Ecma和W3C相关的标准
