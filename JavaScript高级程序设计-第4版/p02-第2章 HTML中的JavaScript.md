@@ -130,4 +130,93 @@ function compare(a,b){
 
 ## 2.2 行内代码与外部文件
 
+常认为最佳实践是尽可能将JavaScript代码放在外部文件中
+
+❑ 可维护性。独立的目录保存JavaScript文件
+❑ 缓存。设置缓存所有外部链接的JavaScript文件，两个页面都用到同一个文件，则该文件只需下载一次。
+❑ 适配。包含外部JavaScript文件的语法在HTML和XHTML中是一样的。
+
+
+SPDY/HTTP2中，预请求的消耗已显著降低。(需要浏览器支持，在较老的浏览器上还是需要用合并为一个大文件优化更合适)  
+在初次请求时SPDY/HTTP2可以从同一个地方取得一批文件，并将它们逐个放到浏览器缓存中。从浏览器角度看，通过SPDY/HTTP2获取所有这些独立的资源与获取一个大JavaScript文件的延迟差不多。
+
+```html
+<script src="mainA.js" ></script>
+<script src="component1.js" ></script>
+<script src="component2.js" ></script>
+<script src="component3.js" ></script>
+```
+
+```html
+<script src="mainB.js" ></script>
+<script src="component4.js" ></script>
+<script src="component5.js" ></script>
+<script src="component6.js" ></script>
+```
+
+
+## 2.3 文档模式
+IE5.5引入doctype文档模式
+**混杂模式**（quirks mode）和**标准模式**（standards mode）
+- 混杂模式 ie5的非标特性
+- 标准模式 兼容标准行为
+
+影响主要在通过CSS渲染的内容方面，对于JavaScript有一些关联副作用
+
+- **准标准模式**（almost standards mode）。这种模式下的浏览器支持很多标准的特性，但是没有标准规定得那么严格。  
+  主要区别在于如何对待图片元素周围的空白（在表格中使用图片时最明显）。
+
+混杂模式在所有浏览器中都以省略文档开头的doctype声明作为开关，这样在不同浏览器上根本没有一致性
+
+标准模式的声明
+```html
+    <!-- HTML 4.01 Strict -->
+    <! DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+    <!-- XHTML 1.0 Strict -->
+    <! DOCTYPE html PUBLIC
+    "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    <!-- HTML5-->
+    <! DOCTYPE html>
+```
+准标准模式通过过渡性文档类型（Transitional）和框架集文档类型（Frameset）来触发：
+
+
+
+```html
+    <!-- HTML 4.01 Transitional -->
+    <! DOCTYPE HTML PUBLIC
+    "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+    <!-- HTML 4.01 Frameset -->
+    <! DOCTYPE HTML PUBLIC
+    "-//W3C//DTD HTML 4.01 Frameset//EN"
+    "http://www.w3.org/TR/html4/frameset.dtd">
+    <!-- XHTML 1.0 Transitional -->
+    <! DOCTYPE html PUBLIC
+    "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <!-- XHTML 1.0 Frameset -->
+    <! DOCTYPE html PUBLIC
+    "-//W3C//DTD XHTML 1.0 Frameset//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+```
+准标准模式与标准模式非常接近，很少需要区分,所以**标准模式**，一般指除混杂模式以外的模式。
+
+2.4 &lt;noscript&gt;元素
+
+如果浏览器不支持script元素，&lt;noscript&gt;的内容就会被显示出来  
+
+包括  
+❑ 浏览器不支持脚本；
+❑ 浏览器对脚本的支持被关闭。
+
+## 2.5 小结
+
+略
+
+
+
+
 
